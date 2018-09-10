@@ -50,6 +50,8 @@ declare global {
       configSettings: Config.Settings;
       /** List of top-level warnings for this Lighthouse run. */
       runWarnings: string[];
+      /** A top-level error message that, if present, indicates a serious enough problem that the result may need to be discarded. */
+      runtimeError: string|undefined;
       /** The User-Agent string of the browser used run Lighthouse for these results. */
       userAgent: string;
       /** Information about the environment in which Lighthouse was run. */
