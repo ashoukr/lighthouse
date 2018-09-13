@@ -174,5 +174,6 @@ const ERRORS = {
 
 /** @type {Record<keyof typeof ERRORS, LighthouseErrorDefinition>} */
 LighthouseError.errors = ERRORS;
+LighthouseError.NO_ERROR = 'NO_ERROR';
 module.exports = LighthouseError;
 

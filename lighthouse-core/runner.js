@@ -294,19 +294,28 @@ class Runner {
   }
 
   /**
-   * Returns any runtimeError message found in artifacts.
+   * Returns first runtimeError found in artifacts.
    * @param {LH.Artifacts} artifacts
-   * @return {string|undefined}
+   * @return {LH.Result['runtimeError']}
    */
   static getArtifactRuntimeError(artifacts) {
     for (const possibleErrorArtifact of Object.values(artifacts)) {
       if (possibleErrorArtifact instanceof LHError && possibleErrorArtifact.lhrRuntimeError) {
         const errorMessage = possibleErrorArtifact.friendlyMessage ?
-          `${possibleErrorArtifact.friendlyMessage} (${possibleErrorArtifact.message})` :
-          possibleErrorArtifact.message;
-        return errorMessage;
+            `${possibleErrorArtifact.friendlyMessage} (${possibleErrorArtifact.message})` :
+            possibleErrorArtifact.message;
+
+        return {
+          code: possibleErrorArtifact.code,
+          message: errorMessage,
+        };
       }
     }
+
+    return {
+      code: LHError.NO_ERROR,
+      message: '',
+    };
   }
 
   /**
